@@ -1,0 +1,8 @@
+<resources>
+    <properties>
+        <!-- 0=1D, 1=1W (default), 2=1M, 3=3M, 4=6M, 5=1Y -->
+        <property id="glancePeriod" type="number">1</property>
+        <!-- 0=1W (default), 1=1M, 2=3M, 3=6M, 4=1Y -->
+        <property id="graphPeriod" type="number">0</property>
+    </properties>
+</resources>

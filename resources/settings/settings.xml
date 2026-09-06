@@ -1,0 +1,21 @@
+<settings>
+    <setting propertyKey="@Properties.glancePeriod" title="@Strings.MenuGlancePeriod">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.Period1Day</listEntry>
+            <listEntry value="1">@Strings.Period1Week</listEntry>
+            <listEntry value="2">@Strings.Period1Month</listEntry>
+            <listEntry value="3">@Strings.Period3Months</listEntry>
+            <listEntry value="4">@Strings.Period6Months</listEntry>
+            <listEntry value="5">@Strings.Period1Year</listEntry>
+        </settingConfig>
+    </setting>
+    <setting propertyKey="@Properties.graphPeriod" title="@Strings.MenuGraphPeriod">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.Period1Week</listEntry>
+            <listEntry value="1">@Strings.Period1Month</listEntry>
+            <listEntry value="2">@Strings.Period3Months</listEntry>
+            <listEntry value="3">@Strings.Period6Months</listEntry>
+            <listEntry value="4">@Strings.Period1Year</listEntry>
+        </settingConfig>
+    </setting>
+</settings>

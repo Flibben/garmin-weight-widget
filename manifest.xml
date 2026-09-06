@@ -1,0 +1,16 @@
+<!-- Connect IQ Application Manifest -->
+<iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="3">
+    <iq:application entry="WeightTrackerApp" id="E4C3B2A15D6E4F7A8B9C0D1E2F3A4B5C" launcherIcon="@Drawables.LauncherIcon" minSdkVersion="4.0.0" name="@Strings.AppName" type="widget">
+        <iq:products>
+            <iq:product id="fenix7spro"/>
+            <iq:product id="fenix7pronowifi"/>
+        </iq:products>
+        <iq:permissions>
+            <iq:uses-permission id="UserProfile"/>
+            <iq:uses-permission id="Background"/>
+        </iq:permissions>
+        <iq:languages>
+            <iq:language>eng</iq:language>
+        </iq:languages>
+    </iq:application>
+</iq:manifest>

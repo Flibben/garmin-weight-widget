@@ -1,0 +1,26 @@
+# Garmin Connect IQ developer private signing keys
+developer_key
+developer_key.*
+*.der
+*.key
+*.pem
+
+# Local SDK Manager executable and downloads
+sdk/
+*.exe
+*.dll
+
+# Build output
+bin/
+*.prg
+*.prg.debug.xml
+
+# Operating System
+Thumbs.db
+[Dd]esktop.ini
+.DS_Store
+
+# IDE / Editor temporary files
+.idea/
+*.swp
+*~

@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "monkeyc",
+            "request": "launch",
+            "name": "Run on Fenix 7S Pro",
+            "device": "fenix7spro",
+            "stopAtLaunch": false
+        }
+    ]
+}

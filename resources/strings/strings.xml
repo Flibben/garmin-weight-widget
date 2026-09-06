@@ -1,0 +1,22 @@
+<resources>
+    <string id="AppName">Weight Tracker</string>
+    <string id="GlanceTitle">WEIGHT</string>
+    <string id="NoData">--.-</string>
+    <string id="SyncPrompt">Weigh in to sync</string>
+    <string id="AverageLabel">Avg</string>
+    <string id="DeltaLabel">Δ</string>
+    
+    <!-- Menu and Settings -->
+    <string id="MenuGlancePeriod">Glance Delta Range</string>
+    <string id="MenuGraphPeriod">Graph Range</string>
+    <string id="MenuAddTestData">Generate Demo Data</string>
+    <string id="MenuClearHistory">Clear History</string>
+    
+    <!-- Periods -->
+    <string id="Period1Day">1 Day</string>
+    <string id="Period1Week">1 Week</string>
+    <string id="Period1Month">1 Month</string>
+    <string id="Period3Months">3 Months</string>
+    <string id="Period6Months">6 Months</string>
+    <string id="Period1Year">1 Year</string>
+</resources>
