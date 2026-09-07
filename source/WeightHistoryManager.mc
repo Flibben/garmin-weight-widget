@@ -273,6 +273,7 @@ class WeightHistoryManager {
 
     //! Testing tool: Generate 90 days of realistic synthetic history
     //! Strictly bounded to 0.1 - 0.4 kg day-to-day changes, anchored to current weight
+    (:debug)
     public static function generateDemoData() as Void {
         var today = (Time.today().value() / 86400).toNumber();
         var demoRecords = [] as Array<Dictionary>;
@@ -332,6 +333,7 @@ class WeightHistoryManager {
     }
 
     //! Testing tool: Clear historical records, keeping only today's current weight
+    (:debug)
     public static function clearHistory() as Void {
         var latestWeight = getLatestWeight();
         var resetRecords = [] as Array<Dictionary>;

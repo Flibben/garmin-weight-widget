@@ -14,6 +14,7 @@ sdk/
 bin/
 *.prg
 *.prg.debug.xml
+*.iq
 
 # Operating System
 Thumbs.db

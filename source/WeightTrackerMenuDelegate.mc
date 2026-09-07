@@ -18,7 +18,14 @@ class WeightTrackerMenuDelegate extends WatchUi.Menu2InputDelegate {
             pushGlanceRangeMenu();
         } else if (id.equals("menu_graph_range")) {
             pushGraphRangeMenu();
-        } else if (id.equals("menu_demo_data")) {
+        } else {
+            handleDebugActions(id);
+        }
+    }
+
+    (:debug)
+    private function handleDebugActions(id as String) as Void {
+        if (id.equals("menu_demo_data")) {
             WeightHistoryManager.generateDemoData();
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
             WatchUi.requestUpdate();
@@ -27,6 +34,11 @@ class WeightTrackerMenuDelegate extends WatchUi.Menu2InputDelegate {
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
             WatchUi.requestUpdate();
         }
+    }
+
+    (:release)
+    private function handleDebugActions(id as String) as Void {
+        // No-op for release builds
     }
 
     public function onBack() as Void {

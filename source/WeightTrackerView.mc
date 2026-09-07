@@ -66,12 +66,13 @@ class WeightTrackerView extends WatchUi.View {
         // -------------------------------------------------------------
         // 1. TOP HEADER: Current Weight & Unit
         // -------------------------------------------------------------
+        var weightY = (height * 0.08).toNumber();
         if (latestWeight != null) {
             var weightStr = WeightHistoryManager.formatWeight(latestWeight) + " " + unit;
             dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
             dc.drawText(
                 centerX,
-                18,
+                weightY,
                 Graphics.FONT_MEDIUM,
                 weightStr,
                 Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
@@ -80,7 +81,7 @@ class WeightTrackerView extends WatchUi.View {
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
             dc.drawText(
                 centerX,
-                18,
+                weightY,
                 Graphics.FONT_MEDIUM,
                 "--.- " + unit,
                 Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
@@ -90,8 +91,8 @@ class WeightTrackerView extends WatchUi.View {
         // -------------------------------------------------------------
         // 2. SUB-HEADER: Timeframe Selector & Stats
         // -------------------------------------------------------------
-        // A. Interactive Timeframe Indicator with mathematically aligned vector arrows
-        var timeframeY = 44;
+        // A. Interactive Timeframe Indicator with dynamically scaled vector arrows
+        var timeframeY = (height * 0.185).toNumber();
         var labelDim = dc.getTextDimensions(periodLabel, Graphics.FONT_TINY);
         var halfLabelW = labelDim[0] / 2;
 
@@ -105,21 +106,25 @@ class WeightTrackerView extends WatchUi.View {
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
         );
 
-        // Vector triangle arrows dynamically spaced 6px from text edges
-        var leftTipX = centerX - halfLabelW - 12;
-        var leftBaseX = centerX - halfLabelW - 6;
+        // Vector triangle arrows dynamically scaled to screen resolution
+        var arrowW = (width > 300) ? 8 : 6;
+        var arrowH = (width > 300) ? 6 : 4;
+        var arrowGap = (width > 300) ? 9 : 6;
+
+        var leftTipX = centerX - halfLabelW - arrowGap - arrowW;
+        var leftBaseX = centerX - halfLabelW - arrowGap;
         var leftArrow = [
             [leftTipX, timeframeY],
-            [leftBaseX, timeframeY - 4],
-            [leftBaseX, timeframeY + 4]
+            [leftBaseX, timeframeY - arrowH],
+            [leftBaseX, timeframeY + arrowH]
         ];
 
-        var rightTipX = centerX + halfLabelW + 12;
-        var rightBaseX = centerX + halfLabelW + 6;
+        var rightTipX = centerX + halfLabelW + arrowGap + arrowW;
+        var rightBaseX = centerX + halfLabelW + arrowGap;
         var rightArrow = [
             [rightTipX, timeframeY],
-            [rightBaseX, timeframeY - 4],
-            [rightBaseX, timeframeY + 4]
+            [rightBaseX, timeframeY - arrowH],
+            [rightBaseX, timeframeY + arrowH]
         ];
 
         dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
@@ -127,6 +132,7 @@ class WeightTrackerView extends WatchUi.View {
         dc.fillPolygon(rightArrow);
 
         // B. Period Stats (Average & Delta)
+        var statsY = (height * 0.27).toNumber();
         var avgWeight = WeightHistoryManager.getAverageForPeriod(periodDays);
         var delta = WeightHistoryManager.getDeltaForPeriod(periodDays);
 
@@ -146,7 +152,7 @@ class WeightTrackerView extends WatchUi.View {
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
             dc.drawText(
                 centerX,
-                64,
+                statsY,
                 Graphics.FONT_XTINY,
                 statsText,
                 Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER
@@ -156,10 +162,10 @@ class WeightTrackerView extends WatchUi.View {
         // -------------------------------------------------------------
         // 3. CENTER: Time-Series Line Graph
         // -------------------------------------------------------------
-        var graphLeft = 28;
-        var graphRight = width - 28;
-        var graphTop = 72;
-        var graphBottom = 196;
+        var graphLeft = (width * 0.12).toNumber();
+        var graphRight = (width * 0.88).toNumber();
+        var graphTop = (height * 0.32).toNumber();
+        var graphBottom = (height * 0.82).toNumber();
         var graphW = graphRight - graphLeft;
         var graphH = graphBottom - graphTop;
 
@@ -205,7 +211,7 @@ class WeightTrackerView extends WatchUi.View {
                     if (avgY >= graphTop && avgY <= graphBottom) {
                         dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
                         // Draw dashed line
-                        var dashStep = 6;
+                        var dashStep = (width > 300) ? 8 : 6;
                         for (var x = graphLeft; x < graphRight; x += (dashStep * 2)) {
                             var xEnd = x + dashStep;
                             if (xEnd > graphRight) {
@@ -220,8 +226,9 @@ class WeightTrackerView extends WatchUi.View {
                 var today = (Time.today().value() / 86400).toNumber();
                 var startDay = today - periodDays;
 
+                var lineWidth = (width > 300) ? 4 : 3;
                 dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
-                dc.setPenWidth(3);
+                dc.setPenWidth(lineWidth);
 
                 var prevX = -1;
                 var prevY = -1;
@@ -253,18 +260,21 @@ class WeightTrackerView extends WatchUi.View {
 
                 // E. Highlight Latest Point
                 if (prevX >= 0) {
+                    var outerR = (width > 300) ? 6 : 4;
+                    var innerR = (width > 300) ? 3 : 2;
                     dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-                    dc.fillCircle(prevX, prevY, 4);
+                    dc.fillCircle(prevX, prevY, outerR);
                     dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
-                    dc.fillCircle(prevX, prevY, 2);
+                    dc.fillCircle(prevX, prevY, innerR);
                 }
             }
         } else if (records.size() == 1) {
             // Single data point message
+            var msgY = (height * 0.48).toNumber();
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
             dc.drawText(
                 centerX,
-                115,
+                msgY,
                 Graphics.FONT_SMALL,
                 "1 Day Recorded",
                 Graphics.TEXT_JUSTIFY_CENTER
@@ -272,17 +282,18 @@ class WeightTrackerView extends WatchUi.View {
             dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
             dc.drawText(
                 centerX,
-                140,
+                msgY + 25,
                 Graphics.FONT_XTINY,
                 "Weigh in daily to see graph",
                 Graphics.TEXT_JUSTIFY_CENTER
             );
         } else {
             // No data message
+            var msgY = (height * 0.48).toNumber();
             dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
             dc.drawText(
                 centerX,
-                115,
+                msgY,
                 Graphics.FONT_SMALL,
                 "No History Yet",
                 Graphics.TEXT_JUSTIFY_CENTER
@@ -290,7 +301,7 @@ class WeightTrackerView extends WatchUi.View {
             dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
             dc.drawText(
                 centerX,
-                140,
+                msgY + 25,
                 Graphics.FONT_XTINY,
                 "Sync scale with Garmin",
                 Graphics.TEXT_JUSTIFY_CENTER
@@ -300,21 +311,26 @@ class WeightTrackerView extends WatchUi.View {
         // -------------------------------------------------------------
         // 4. BOTTOM INDICATOR: 5-Dot Page Indicator (Zero Bezel Clipping)
         // -------------------------------------------------------------
-        var dotY = height - 24;
+        var dotY = (height * 0.90).toNumber();
         var dotCount = WeightHistoryManager.GRAPH_PERIOD_DAYS.size();
-        var dotSpacing = 10;
+        var dotSpacing = (width * 0.042).toNumber();
+        if (dotSpacing < 8) {
+            dotSpacing = 8;
+        }
         var startDotX = centerX - ((dotCount - 1) * dotSpacing) / 2;
+        var activeR = (width > 300) ? 4 : 3;
+        var inactiveR = (width > 300) ? 3 : 2;
 
         for (var i = 0; i < dotCount; i++) {
             var dotX = startDotX + (i * dotSpacing);
             if (i == _graphPeriodIndex) {
-                // Active timeframe dot (filled blue, radius 3)
+                // Active timeframe dot
                 dc.setColor(Graphics.COLOR_BLUE, Graphics.COLOR_TRANSPARENT);
-                dc.fillCircle(dotX, dotY, 3);
+                dc.fillCircle(dotX, dotY, activeR);
             } else {
-                // Inactive dot (dark gray, radius 2)
+                // Inactive dot
                 dc.setColor(Graphics.COLOR_DK_GRAY, Graphics.COLOR_TRANSPARENT);
-                dc.fillCircle(dotX, dotY, 2);
+                dc.fillCircle(dotX, dotY, inactiveR);
             }
         }
     }

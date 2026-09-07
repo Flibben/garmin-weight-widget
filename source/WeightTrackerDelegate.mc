@@ -55,20 +55,27 @@ class WeightTrackerDelegate extends WatchUi.BehaviorDelegate {
         var x = coords[0];
         var y = coords[1];
 
-        // 1. Tapping near the timeframe switcher arrows (y between 25 and 65)
-        if (y >= 25 && y <= 65) {
-            if (x < 110) {
+        var devSettings = System.getDeviceSettings();
+        var width = devSettings.screenWidth;
+        var height = devSettings.screenHeight;
+        var centerX = width / 2;
+
+        // 1. Tapping near the timeframe switcher arrows (y between 10% and 25% of height)
+        var tfMinY = (height * 0.10).toNumber();
+        var tfMaxY = (height * 0.25).toNumber();
+        if (y >= tfMinY && y <= tfMaxY) {
+            if (x < centerX - 10) {
                 _view.previousPeriod();
                 return true;
-            } else if (x > 130) {
+            } else if (x > centerX + 10) {
                 _view.nextPeriod();
                 return true;
             }
         }
 
-        // 2. Tapping near the bottom dots (y > 200)
-        if (y > 200) {
-            if (x < 120) {
+        // 2. Tapping near the bottom dots (y > 85% of height)
+        if (y > (height * 0.85).toNumber()) {
+            if (x < centerX) {
                 _view.previousPeriod();
             } else {
                 _view.nextPeriod();
@@ -97,10 +104,19 @@ class WeightTrackerDelegate extends WatchUi.BehaviorDelegate {
         var graphLabel = WeightHistoryManager.GRAPH_PERIOD_LABELS[graphIdx];
         menu.addItem(new WatchUi.MenuItem("Graph Range", graphLabel, "menu_graph_range", null));
 
-        // Testing & Demo data items (active during development/testing)
-        menu.addItem(new WatchUi.MenuItem("Generate Demo Data", "Load 90-day test data", "menu_demo_data", null));
-        menu.addItem(new WatchUi.MenuItem("Clear History", "Reset to today", "menu_clear_history", null));
+        addDebugMenuItems(menu);
 
         WatchUi.pushView(menu, new WeightTrackerMenuDelegate(_view), WatchUi.SLIDE_UP);
+    }
+
+    (:debug)
+    private function addDebugMenuItems(menu as WatchUi.Menu2) as Void {
+        menu.addItem(new WatchUi.MenuItem("Generate Demo Data", "Load 90-day test data", "menu_demo_data", null));
+        menu.addItem(new WatchUi.MenuItem("Clear History", "Reset to today", "menu_clear_history", null));
+    }
+
+    (:release)
+    private function addDebugMenuItems(menu as WatchUi.Menu2) as Void {
+        // No debug items in production release builds
     }
 }
