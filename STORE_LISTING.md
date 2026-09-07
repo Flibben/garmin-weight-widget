@@ -68,17 +68,22 @@ Weight Tracker & Trends is committed to total user privacy:
 
 | Asset | Location | Specifications |
 | :--- | :--- | :--- |
-| **Store App Icon** | `resources/images/store_icon_512.png` | 512×512 PNG, dark theme with scale & cyan trend line |
+| **Store App Icon** | `resources/images/store_icon_512.png` | 512×512 PNG, transparent background with solid white scale |
+| **Hero Image (Banner)** | `resources/images/hero_image_1440x720.png` | 1440×720 PNG (<110 KB), scale-to-wrist flow promotional banner |
 | **Export Package** | `bin/WeightTracker.iq` | Signed 60-device universal archive (CIQ 4.0+) |
 
 ---
 
 ## 5. How to Upload to Garmin Connect IQ
 
-1. Log in to the [Garmin Connect IQ Developer Dashboard](https://apps.garmin.com/developer/dashboard).
-2. Click **"Upload an App"**.
-3. Select the file: `bin/WeightTracker.iq`.
-4. Upload the store icon: `resources/images/store_icon_512.png`.
-5. Paste the Title, Short Description, and Full Description above.
-6. (Optional) In the Connect IQ Simulator, open the app, press `Ctrl+S` to capture 1-2 screenshots of the graph, and upload them under "Screenshots".
-7. Click **Submit for Review**.
+1. On the [Garmin Upload Page](https://apps.garmin.com/developer/upload):
+2. Select your signed export package:
+   - Path: `c:\Programmering\JP\garmin-weight-widget\bin\WeightTracker.iq`
+3. Upload the Store Icon:
+   - Path: `c:\Programmering\JP\garmin-weight-widget\resources\images\store_icon_512.png`
+4. Upload the Hero Image:
+   - Click **"Choose Image"** under Hero Image (Optional) and select:
+   - Path: `c:\Programmering\JP\garmin-weight-widget\resources\images\hero_image_1440x720.png`
+5. Paste the Title and Description from Sections 1 and 2 above.
+6. (Optional) In the Connect IQ Simulator, open the app, press Ctrl+S to capture 1-2 screenshots of the graph, and upload them under Screenshots.
+7. Click Submit for Review.
