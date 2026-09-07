@@ -18,34 +18,35 @@ Automated daily weight tracking from your Garmin scale with glance widgets and i
 
 ---
 
-## 2. Full Description (Markdown for Store Listing)
+## 2. Description (Plain Text for Garmin Store Description Box)
 
-```markdown
-**Weight Tracker & Trends** brings seamless, automatic weight history and interactive trend analysis right to your Garmin watch.
+```text
+Weight Tracker & Trends brings seamless, automatic weight history and interactive trend analysis right to your Garmin watch.
 
-Whether you weigh in with a Garmin Index / Index S2 smart scale or sync your weight from Garmin Connect, this widget keeps your latest weight, period deltas, and long-term trends right at your fingertips in your daily glance loop.
+Whether you weigh in with a Garmin Index / Index S2 smart scale or sync your weight via Garmin Connect, this widget keeps your latest weight, period deltas, and long-term trends right at your fingertips in your daily glance loop.
 
-### 🌟 Key Features
-- **Effortless & Automated:** Reads directly from your Garmin profile daily at 23:30. No manual entry or companion app required.
-- **Glance Carousel Overview:** View your latest weight, units, and customizable comparison delta (e.g. -0.4 kg over 1W) without opening the full widget.
-- **Interactive Full-Screen Graph:**
+KEY FEATURES:
+• Effortless & Automated: Reads directly from your Garmin profile daily at 23:30. No manual entry or companion phone app required.
+• Glance Carousel Overview: View your latest weight, units, and customizable comparison delta (e.g. -0.4 kg over 1W) without having to open the full widget.
+• Interactive Full-Screen Graph:
   - Dynamic anti-aliased vector trend line auto-scaled to your data.
-  - Dashed reference line showing your **Period Average**.
-  - 5 Selectable Timeframes: **1 Week, 1 Month, 3 Months, 6 Months, and 1 Year**.
-- **Intuitive Controls:**
-  - Swipe left/right or tap arrows / bottom dots to change timeframes.
-  - Full button support: UP/DOWN cycles timeframes; START/ENTER opens settings.
-- **Smart Unit Support:** Automatically respects your watch profile settings (kg or lbs) and seamlessly recalculates all statistics and graphs if you switch units.
-- **Privacy-First & Battery Efficient:** 100% on-device storage. Never drains battery in the background and zero personal health data leaves your watch.
+  - Dashed reference line indicating your Period Average.
+  - 5 selectable timeframes: 1 Week, 1 Month, 3 Months, 6 Months, and 1 Year.
+• Intuitive Controls:
+  - Touchscreen: Swipe left/right or tap arrows and bottom dots to change timeframes.
+  - Buttons: UP/DOWN cycles timeframes; START/ENTER opens settings.
+• Smart Unit Support: Automatically respects your watch profile settings (kg or lbs) and seamlessly recalculates all statistics and graphs if you change units.
+• Privacy-First & Battery Efficient: 100% on-device local storage. Never drains battery in the background and zero personal health data leaves your watch.
 
----
-
-### ⚙️ How to Configure
-1. Add **Weight Tracker** to your watch's Widget / Glance loop.
+HOW TO CONFIGURE:
+1. Add Weight Tracker to your watch's Widget / Glance loop.
 2. Select the glance to open the full trend graph.
-3. Press **START** or long-press **UP** (or tap anywhere on the graph) to open **Weight Settings**:
-   - **Glance Range:** Choose the comparison timeframe displayed on the glance (1 Day, 1 Week, 1 Month, 3 Months, 6 Months, 1 Year).
-   - **Graph Range:** Set your default graph zoom level.
+3. Press START or long-press UP (or tap anywhere on the graph) to open Weight Settings:
+   - Glance Range: Choose the comparison timeframe displayed on the glance (1 Day, 1 Week, 1 Month, 3 Months, 6 Months, 1 Year).
+   - Graph Range: Set your default graph zoom level.
+
+PRIVACY:
+All weigh-in records are stored exclusively on your watch. This widget contains no internet permissions and sends zero personal data to third parties.
 ```
 
 ---
